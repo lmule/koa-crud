@@ -27,7 +27,7 @@ controller.add  = async (ctx, next) => {
 }
 
 controller.update = async (ctx, next) => {
-    const {{{#each table.columns}}{{this}}, {{/each}}} = ctx.query
+    {{#each table.columns}}{{this}}, {{/each}} = ctx.query
     // TODO: 这里是验证
 
     const value = {
