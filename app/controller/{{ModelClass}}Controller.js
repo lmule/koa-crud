@@ -27,13 +27,17 @@ controller.add  = async (ctx, next) => {
 }
 
 controller.update = async (ctx, next) => {
-    const { {{#each table.columns}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}} }= ctx.query
+    const { {{#each table.columns}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}} } = ctx.query
     // TODO: 这里是验证
 
     const value = {
-        code: code,
-        name: name,
-        description: description
+        {{#each table.columns}}
+            {{#if @last}}
+                {{this}}: {{this}}
+            {{else}}
+                {{this}}: {{this}},
+            {{/if}}
+        {{/each}}
     }
 
     let result = await new {{ModelClass}}Model(value).save()
