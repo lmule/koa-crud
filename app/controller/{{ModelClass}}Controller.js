@@ -3,6 +3,14 @@ const util = require('util')
 
 let controller = {}
 
+controller.get= async (ctx, next) => {
+    const { {{table.primaryKey}} } = ctx.query
+    return await {{ModelClass}}Model
+        .query({
+            where: { {{table.primaryKey}}: {{table.primaryKey}} }
+        })
+}
+
 controller.list = async (ctx, next) => {
     return await {{ModelClass}}Model
         .fetchAll({
@@ -10,13 +18,17 @@ controller.list = async (ctx, next) => {
 }
 
 controller.add  = async (ctx, next) => {
-    const {code, name, description} = ctx.query
+    const { {{#each table.columns}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}} } = ctx.query
     // 这里是验证
 
     const value = {
-        code: code,
-        name: name,
-        description: description
+        {{#each table.columns}}
+        {{#if @last}}
+        {{this}}: {{this}}
+        {{else}}
+        {{this}}: {{this}},
+        {{/if}}
+        {{/each}}
     }
 
     let result = await new {{ModelClass}}Model(value).save()
@@ -32,11 +44,11 @@ controller.update = async (ctx, next) => {
 
     const value = {
         {{#each table.columns}}
-            {{#if @last}}
-                {{this}}: {{this}}
-            {{else}}
-                {{this}}: {{this}},
-            {{/if}}
+        {{#if @last}}
+        {{this}}: {{this}}
+        {{else}}
+        {{this}}: {{this}},
+        {{/if}}
         {{/each}}
     }
 
@@ -48,10 +60,11 @@ controller.update = async (ctx, next) => {
 }
 
 controller.delete = async (ctx, next) => {
-    return await PageType
-            .fetchAll({
-                columns: ['id', 'code', 'name']
-            })
+    return await {{ModelClass}}Model
+        .query({
+            where: { {{table.primaryKey}}: {{table.primaryKey}} }
+        })
+        .destroy()
 }
 
 

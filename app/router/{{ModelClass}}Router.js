@@ -3,6 +3,8 @@ const controller = require('../controller/{{ModelClass}}Controller')
 
 router.prefix('/{{modelclass}}');
 
+router.get('/get', controller.get)
+
 router.get('/list', controller.list)
 
 router.get('/add', controller.add)
