@@ -1,18 +1,18 @@
-const {{ModelClass}}Model = require('../model/{{ModelClass}}Model')
+const {{ModelName}}Model = require('../model/{{ModelName}}Model')
 const util = require('util')
 
 let controller = {}
 
 controller.get= async (ctx, next) => {
     const { {{table.primaryKey}} } = ctx.query
-    return await {{ModelClass}}Model
+    return await {{ModelName}}Model
         .query({
             where: { {{table.primaryKey}}: {{table.primaryKey}} }
         })
 }
 
 controller.list = async (ctx, next) => {
-    return await {{ModelClass}}Model
+    return await {{ModelName}}Model
         .fetchAll({
         })
 }
@@ -31,7 +31,7 @@ controller.add  = async (ctx, next) => {
         {{/each}}
     }
 
-    let result = await new {{ModelClass}}Model(value).save()
+    let result = await new {{ModelName}}Model(value).save()
     if (result.id <= 0) {
         throw new Error(util.format('保存失败，具体数据是:%s', JSON.stringify(value)))
     }
@@ -52,7 +52,7 @@ controller.update = async (ctx, next) => {
         {{/each}}
     }
 
-    let result = await new {{ModelClass}}Model(value).save()
+    let result = await new {{ModelName}}Model(value).save()
     if (result.id <= 0) {
         throw new Error(util.format('保存失败，具体数据是:%s', JSON.stringify(value)))
     }
@@ -60,7 +60,7 @@ controller.update = async (ctx, next) => {
 }
 
 controller.delete = async (ctx, next) => {
-    return await {{ModelClass}}Model
+    return await {{ModelName}}Model
         .query({
             where: { {{table.primaryKey}}: {{table.primaryKey}} }
         })
