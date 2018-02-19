@@ -1,5 +1,5 @@
 const db = require('../helper/db')
 
 module.exports = db.Model.extend({
-      tableName: '{{tableName}}',
+      tableName: '{{table.name}}',
 })
