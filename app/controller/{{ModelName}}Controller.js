@@ -45,7 +45,7 @@ controller.update = async (ctx, next) => {
 
     const value = {
         {{#each table.columns}}
-        {{#isnt this table.primaryKey}}
+        {{#is this table.primaryKey}}
         {{#if @last}}
         {{this}}: {{this}}
         {{else}}
