@@ -43,15 +43,14 @@ controller.update = async (ctx, next) => {
     const { {{#each table.columns}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}} } = ctx.query
     // TODO: 这里是验证
 
+    {{! 等有空的时候把主键单独拿出来}}
     const value = {
         {{#each table.columns}}
-        {{#is this table.primaryKey}}
         {{#if @last}}
         {{this}}: {{this}}
         {{else}}
         {{this}}: {{this}},
         {{/if}}
-        {{/is}}
         {{/each}}
     }
 
@@ -64,7 +63,7 @@ controller.update = async (ctx, next) => {
 
 controller.delete = async (ctx, next) => {
     const { {{table.primaryKey}} } = ctx.query
-    // bookshelf在删除的时候好像没有标识是否删除成功（只要不报错就认为是删除成功，然而它并不知道删除了几条）
+    {{! bookshelf在删除的时候好像没有标识是否删除成功（只要不报错就认为是删除成功，然而它并不知道删除了几条）}} 
     await {{ModelName}}Model
         .where({
             {{table.primaryKey}}: {{table.primaryKey}}
