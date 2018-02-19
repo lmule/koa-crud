@@ -3,12 +3,13 @@ const util = require('util')
 
 let controller = {}
 
-controller.get= async (ctx, next) => {
+controller.get = async (ctx, next) => {
     const { {{table.primaryKey}} } = ctx.query
     return await {{ModelName}}Model
-        .query({
-            where: { {{table.primaryKey}}: {{table.primaryKey}} }
+        .where({
+            {{table.primaryKey}}: {{table.primaryKey}}
         })
+        .fetch()
 }
 
 controller.list = async (ctx, next) => {
@@ -44,6 +45,9 @@ controller.update = async (ctx, next) => {
 
     const value = {
         {{#each table.columns}}
+        {{#is this table.primaryKey}}
+        1111
+        {{/is}}
         {{#if @last}}
         {{this}}: {{this}}
         {{else}}
@@ -60,11 +64,14 @@ controller.update = async (ctx, next) => {
 }
 
 controller.delete = async (ctx, next) => {
-    return await {{ModelName}}Model
-        .query({
-            where: { {{table.primaryKey}}: {{table.primaryKey}} }
+    const { {{table.primaryKey}} } = ctx.query
+    // bookshelf在删除的时候好像没有标识是否删除成功（只要不报错就认为是删除成功，然而它并不知道删除了几条）
+    await {{ModelName}}Model
+        .where({
+            {{table.primaryKey}}: {{table.primaryKey}}
         })
         .destroy()
+    return true
 }
 
 
