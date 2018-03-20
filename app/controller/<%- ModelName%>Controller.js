@@ -7,7 +7,6 @@ controller.get = async (ctx, next) => {
     const { <%- table.primaryKey %> } = ctx.query
     return await <%- ModelName %>Model
         .where({
-            <%- table.primaryKey %>: <%- table.primaryKey %>
         })
         .fetch()
 }
