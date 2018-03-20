@@ -28,7 +28,7 @@ controller.add  = async (ctx, next) => {
             <%- table.columns[i]%>: <%- table.columns[i]%>
         <% } else {%>
             <%- table.columns[i]%>: <%- table.columns[i]%>,
-        <% }) %>
+        <% }} %>
     }
 
     let result = await new <%- ModelName %>Model(value).save()
@@ -70,6 +70,5 @@ controller.delete = async (ctx, next) => {
         .destroy()
     return true
 }
-
 
 module.exports = controller
