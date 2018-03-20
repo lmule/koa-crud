@@ -24,10 +24,10 @@ controller.add  = async (ctx, next) => {
 
     const value = {
         <% for (var i = 0; i < table.columns.length; i++) {
-            if (i == table.columns.length - 1) {%>
-            <%- table.columns[i]%>: <%- table.columns[i]%>
+            if (i == table.columns.length - 1) {-%>
+            <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% } else {%>
-            <%- table.columns[i]%>: <%- table.columns[i]%>,
+            <%- table.columns[i]%>: <%- table.columns[i]-%>,
         <% }} %>
     }
 
@@ -39,16 +39,16 @@ controller.add  = async (ctx, next) => {
 }
 
 controller.update = async (ctx, next) => {
-    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) {%> <%- table.columns[i]%><% } else {%><%- table.columns[i]%>: <%- table.columns[i]%>, <% }} %> } = ctx.query
+    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) {%> <%- table.columns[i]%><% } else {%><%- table.columns[i]%>, <% }} %> } = ctx.query
     // TODO: 这里是验证
 
     <%# 等有空的时候把主键单独拿出来%>
     const value = {
         <% for (var i = 0; i < table.columns.length; i++) {
-            if (i == table.columns.length - 1) {%>
-            <%- table.columns[i]%>: <%- table.columns[i]%>
+            if (i == table.columns.length - 1) {-%>
+            <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% } else {%>
-            <%- table.columns[i]%>: <%- table.columns[i]%>,
+            <%- table.columns[i]%>: <%- table.columns[i]-%>,
         <% }} %>
     }
 
