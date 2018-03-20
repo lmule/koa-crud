@@ -1,7 +1,7 @@
 const router = require('koa-router')()
-const controller = require('../controller/{{ModelName}}Controller')
+const controller = require('../controller/<%- ModelName%>Controller')
 
-router.prefix('/{{modelname}}');
+router.prefix('/<%- modelname%>');
 
 router.get('/get', controller.get)
 
