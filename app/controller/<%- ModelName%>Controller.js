@@ -1,1 +1,0 @@
-const <%- ModelName %>Model = require('../model/<%- ModelName %>Model')
