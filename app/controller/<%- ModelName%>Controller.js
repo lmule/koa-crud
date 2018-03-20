@@ -19,17 +19,8 @@ controller.list = async (ctx, next) => {
 }
 
 controller.add  = async (ctx, next) => {
-    const { <%- #each table.columns %><%- #if @last %><%- this %><%- else %><%- this %>, <%- /if %><%- /each %> } = ctx.query
     // TODO: 这里是验证
 
-    const value = {
-        <% for (var i = 0; i < table.columns.length; i++) {
-            if (i == table.columns.length) {%>
-            <%- table.columns[i]%>: <%- table.columns[i]%>
-        <% } else {%>
-            <%- table.columns[i]%>: <%- table.columns[i]%>,
-        <% }} %>
-    }
 
     let result = await new <%- ModelName %>Model(value).save()
     if (result.id <= 0) {
