@@ -27,7 +27,7 @@ controller.add  = async (ctx, next) => {
             if (i == table.columns.length - 1) {%>
             <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% } else {%>
-            <%- table.columns[i]%>: <%- table.columns[i]-%>,
+            <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% }} %>
     }
 
