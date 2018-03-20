@@ -19,7 +19,6 @@ controller.list = async (ctx, next) => {
 }
 
 controller.add  = async (ctx, next) => {
-    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) {%> <%- table.columns[i]%><% } else {%><%- table.columns[i]%>: <%- table.columns[i]%>, <% }} %> } = ctx.query
     // TODO: 这里是验证
 
     const value = {
@@ -39,7 +38,6 @@ controller.add  = async (ctx, next) => {
 }
 
 controller.update = async (ctx, next) => {
-    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) {%> <%- table.columns[i]%><% } else {%><%- table.columns[i]%>: <%- table.columns[i]%>, <% }} %> } = ctx.query
     // TODO: 这里是验证
 
     const value = {
