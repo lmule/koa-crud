@@ -46,8 +46,7 @@ controller.update = async (ctx, next) => {
             if (i == table.columns.length - 1) {%>
         <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% } else {%>
-        <%- table.columns[i]%>: <%- table.columns[i]-%>
-        <% }} %>
+        <%- table.columns[i]%>: <%- table.columns[i]%>, <% }} %>
     }
 
     let result = await new <%- ModelName%>Model(value).save()
