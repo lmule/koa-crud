@@ -49,7 +49,7 @@ controller.update = async (ctx, next) => {
         <%- table.columns[i]%>: <%- table.columns[i]%>, <% }} %>
     }
 
-    let result = await new <%- ModelName%>Model({<%- table.promaryKey%>: <%- table.promaryKey%>}).save(value, {patch: true})
+    let result = await new <%- ModelName%>Model({<%- table.primaryKey%>: <%- table.primaryKey%>}).save(value, {patch: true})
     if (result.id <= 0) {
         throw new Error(util.format('保存失败，具体数据是:%s', JSON.stringify(value)))
     }
