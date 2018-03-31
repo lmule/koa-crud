@@ -48,7 +48,7 @@ controller.update = async (ctx, next) => {
             if (i == table.columns.length - 1) {%>
                 if (table.columns[i] != table.primaryKey) {%>
         <%- table.columns[i]%>: <%- table.columns[i]-%>
-        <% }} else {%>
+        <% }} else {
             if (table.columns[i] != table.primaryKey) {%>
         <%- table.columns[i]%>: <%- table.columns[i]%>, <% }}} %>
     }
