@@ -19,7 +19,7 @@ controller.list = async (ctx, next) => {
 }
 
 controller.add  = async (ctx, next) => {
-    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) {%> <%- table.columns[i]%><% } else {%><%- table.columns[i]%>, <% }} %> } = ctx.query
+    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) { if (table.columns[i] != table.primaryKey) {%> <%- table.columns[i]%><% }} else { if (table.columns[i] != table.primaryKey) {%><%- table.columns[i]%>, <% }}} %> } = ctx.query
     // TODO: 这里是验证
 
     const value = {<% -%>
