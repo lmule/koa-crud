@@ -46,9 +46,11 @@ controller.update = async (ctx, next) => {
     const value = {<% -%>
         <% for (var i = 0; i < table.columns.length; i++) {
             if (i == table.columns.length - 1) {%>
+                if (table.columns[i] != table.primaryKey) {%>
         <%- table.columns[i]%>: <%- table.columns[i]-%>
-        <% } else {%>
-        <%- table.columns[i]%>: <%- table.columns[i]%>, <% }} %>
+        <% }} else {%>
+            if (table.columns[i] != table.primaryKey) {%>
+        <%- table.columns[i]%>: <%- table.columns[i]%>, <% }}} %>
     }
 
     let result = await new <%- ModelName%>Model({<%- table.primaryKey%>: <%- table.primaryKey%>}).save(value, {patch: true})
