@@ -45,7 +45,7 @@ controller.update = async (ctx, next) => {
 
     const value = {<% -%>
         <% for (var i = 0; i < table.columns.length; i++) {
-            if (i == table.columns.length - 1) {%>
+            if (i == table.columns.length - 1) {
                 if (table.columns[i] != table.primaryKey) {%>
         <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% }} else {
