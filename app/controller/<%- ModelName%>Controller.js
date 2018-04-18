@@ -33,7 +33,7 @@ controller.add  = async (ctx, next) => {
 
     let result = await new <%- ModelName%>Model(value).save()
     if (result.id <= 0) {
-        throw new Error(`保存失败，具体数据是:${JSON.stringify(value)}`))
+        throw new Error(`保存失败，具体数据是:${JSON.stringify(value)}`)
     }
     return true
 }
@@ -54,7 +54,7 @@ controller.update = async (ctx, next) => {
 
     let result = await new <%- ModelName%>Model({<%- table.primaryKey%>: <%- table.primaryKey%>}).save(value, {patch: true})
     if (result.id <= 0) {
-        throw new Error(`保存失败，具体数据是:${JSON.stringify(value)}`))
+        throw new Error(`保存失败，具体数据是:${JSON.stringify(value)}`)
     }
     return true
 }
