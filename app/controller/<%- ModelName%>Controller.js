@@ -62,11 +62,11 @@ controller.update = async (ctx, next) => {
                 if (table.columns[i] != table.camelCasedPrimaryKey) {%>
         <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% }} else {
-            if (table.columns[i] != table.primaryKey) {%>
+            if (table.columns[i] != table.camelCasedPrimaryKey) {%>
         <%- table.columns[i]%>: <%- table.columns[i]%>, <% }}} %>
     }
 
-    let result = await new <%- ModelName%>Model({<%- table.primaryKey%>: <%- table.camelCasedprimaryKey%>}).save(value, {patch: true})
+    let result = await new <%- ModelName%>Model({<%- table.primaryKey%>: <%- table.camelCasedPrimaryKey%>}).save(value, {patch: true})
     if (result.id <= 0) {
         throw new Error(`保存失败，具体数据是:${JSON.stringify(value)}`)
     }
