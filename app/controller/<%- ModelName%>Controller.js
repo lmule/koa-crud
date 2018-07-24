@@ -3,10 +3,10 @@ const <%- ModelName%>Model = require('../model/<%- ModelName%>Model')
 let controller = {}
 
 controller.get = async (ctx, next) => {
-    const { <%- table.camelCasedprimaryKey%> } = ctx.query
+    const { <%- table.camelCasedPrimaryKey%> } = ctx.query
     return await <%- ModelName%>Model
         .where({
-            <%- table.primaryKey%>: <%- table.camelCasedprimaryKey%>
+            <%- table.primaryKey%>: <%- table.camelCasedPrimaryKey%>
         })
         .fetch()
 }
@@ -59,7 +59,7 @@ controller.update = async (ctx, next) => {
     const value = {<% -%>
         <% for (var i = 0; i < table.columns.length; i++) {
             if (i == table.columns.length - 1) {
-                if (table.columns[i] != table.camelCasedprimaryKey) {%>
+                if (table.columns[i] != table.camelCasedPrimaryKey) {%>
         <%- table.columns[i]%>: <%- table.columns[i]-%>
         <% }} else {
             if (table.columns[i] != table.primaryKey) {%>
@@ -74,11 +74,11 @@ controller.update = async (ctx, next) => {
 }
 
 controller.delete = async (ctx, next) => {
-    const { <%- table.camelCasedprimaryKey%> } = ctx.request.body
+    const { <%- table.camelCasedPrimaryKey%> } = ctx.request.body
     <%# bookshelf在删除的时候好像没有标识是否删除成功（只要不报错就认为是删除成功，然而它并不知道删除了几条）%>
     await <%- ModelName%>Model
         .where({
-            <%- table.primaryKey%>: <%- table.camelCasedprimaryKey%>
+            <%- table.primaryKey%>: <%- table.camelCasedPrimaryKey%>
         })
         .destroy()
     return true
