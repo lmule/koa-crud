@@ -7,10 +7,10 @@ router.get('/get', controller.get)
 
 router.get('/list', controller.list)
 
-router.get('/add', controller.add)
+router.post('/add', controller.add)
 
-router.get('/update', controller.update)
+router.post('/update', controller.update)
 
-router.get('/delete', controller.delete)
+router.post('/delete', controller.delete)
 
 module.exports = router

@@ -12,13 +12,25 @@ controller.get = async (ctx, next) => {
 }
 
 controller.list = async (ctx, next) => {
-    return await <%- ModelName%>Model
-        .fetchAll({
+    const { page = 1, pageSize = 20 } = ctx.query;
+
+    const collection = await <%- ModelName%>Model
+        .query()
+        .orderBy('-<%- table.primaryKey%>')
+        .fetchPage({
+            page,
+            pageSize
         })
+    const { pagination } = collection
+    return { 
+        data: collection,
+        pagination
+    }
+
 }
 
 controller.add  = async (ctx, next) => {
-    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) { if (table.columns[i] != table.primaryKey) {%> <%- table.columns[i]%><% }} else { if (table.columns[i] != table.primaryKey) {%><%- table.columns[i]%>, <% }}} %> } = ctx.query
+    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) { if (table.columns[i] != table.primaryKey) {%> <%- table.columns[i]%><% }} else { if (table.columns[i] != table.primaryKey) {%><%- table.columns[i]%>, <% }}} %> } = ctx.request.body
     // TODO: 这里是验证
 
     const value = {<% -%>
@@ -39,7 +51,7 @@ controller.add  = async (ctx, next) => {
 }
 
 controller.update = async (ctx, next) => {
-    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) {%> <%- table.columns[i]%><% } else {%><%- table.columns[i]%>, <% }} %> } = ctx.query
+    const { <% for (var i = 0; i < table.columns.length; i++) { if (i == table.columns.length - 1) {%> <%- table.columns[i]%><% } else {%><%- table.columns[i]%>, <% }} %> } = ctx.request.body
     // TODO: 这里是验证
 
     const value = {<% -%>
@@ -60,7 +72,7 @@ controller.update = async (ctx, next) => {
 }
 
 controller.delete = async (ctx, next) => {
-    const { <%- table.primaryKey%> } = ctx.query
+    const { <%- table.primaryKey%> } = ctx.request.body
     <%# bookshelf在删除的时候好像没有标识是否删除成功（只要不报错就认为是删除成功，然而它并不知道删除了几条）%>
     await <%- ModelName%>Model
         .where({
